@@ -18,13 +18,26 @@ app.service('itunesService', function ($http, $q) {
       url: 'https://itunes.apple.com/search?term=' + artist + '&callback=JSON_CALLBACK',
 
     }).then(function (response) {
-      var arrOfObs = [];
-      
-      
-      
-      
-      deferred.resolve();
-    });
+      var arrOfNewObs = [];
+      var arrThatWeHave = response.data.results;
+      for (var i = 0; i < arrThatWeHave.length; i++) {
+        var currentObj = arrThatWeHave[i];
+
+
+        var newObject = {
+          AlbumArt: currentObj.artworkUrl100,
+          Artist: currentObj.artistName,
+          Collection: currentObj.collectionName,
+          CollectionPrice: currentObj.collectionPrice,
+          Play: currentObj.previewUrl,
+          Type: currentObj.kind
+        };
+        arrOfNewObs.push(newObject);
+      }
+
+
+        deferred.resolve(arrOfNewObs);
+      });
 
 
     return deferred.promise;
