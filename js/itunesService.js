@@ -14,10 +14,16 @@ app.service('itunesService', function ($http, $q) {
     var deferred = $q.defer();
 
     $http({
-      method: 'GET',
-      url: 'https://itunes.apple.com/search?term=' + artist + '&callback=JSON_CALLBACK'
+      method: 'JSONP',
+      url: 'https://itunes.apple.com/search?term=' + artist + '&callback=JSON_CALLBACK',
+
     }).then(function (response) {
-      deferred.resolve(response);
+      var arrOfObs = [];
+      
+      
+      
+      
+      deferred.resolve();
     });
 
 
